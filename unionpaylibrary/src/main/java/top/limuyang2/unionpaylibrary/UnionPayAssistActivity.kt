@@ -28,6 +28,7 @@ class UnionPayAssistActivity : AppCompatActivity() {
         val payModel = intent.getSerializableExtra(PAY_TYPE) as UnionPayType
         val tn = intent.getStringExtra(TN)
 
+        Log.e("MMM", "oncreate-----"+tn)
         UPPayAssistEx.startPay(this, null, null, tn, payModel.model)
 
     }

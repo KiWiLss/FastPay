@@ -6,12 +6,18 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/testBtn"
+        android:id="@+id/btn_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:text="pay" />
+
+    <Button
+        android:id="@+id/btn_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pay two"/>
 
 
 </RelativeLayout>
