@@ -37,8 +37,9 @@ abstract class BaseWXPayEntryActivity : Activity(), IWXAPIEventHandler {
                     it.errCode == 0 -> //成功
                         FastWxPay.wxPayLiveData?.postValue(PayResource.success())
                     it.errCode == -1 -> //错误
+
                         FastWxPay.wxPayLiveData?.postValue(PayResource.failed(it.errStr
-                                                                                  ?: "支付发生错误"))
+                                                                                  ?: "支付发生错误",resp.errStr,resp.transaction,resp.openId))
                     it.errCode == -2 -> //取消
                         FastWxPay.wxPayLiveData?.postValue(PayResource.cancel())
                 }

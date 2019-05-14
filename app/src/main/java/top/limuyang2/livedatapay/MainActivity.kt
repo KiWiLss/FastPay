@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.tencent.mm.opensdk.modelpay.PayReq
 import kotlinx.android.synthetic.main.activity_main.*
-import top.limuyang2.unionpaylibrary.FastUnionPay
-import top.limuyang2.unionpaylibrary.UnionPayObserver
-import top.limuyang2.unionpaylibrary.UnionPayType
+import top.limuyang2.wechatpaylibrary.FastWxPay
+import top.limuyang2.wechatpaylibrary.WxPayObserver
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,21 +21,29 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,"hello",Toast.LENGTH_LONG).show()
             Log.e("MMM", "click")
 
+            val request = PayReq()
+            request.appId = "wx7e16cf49c52635e2"
+            request.partnerId = "1900000109"
+            request.prepayId = "1101000000140415649af9fc314aa427"
+            request.packageValue = "Sign=WXPay"
+            request.nonceStr = "1101000000140429eb40476f8896f4c9"
+            request.timeStamp = "1398746574"
+            request.sign = "7FFECB600D7157C5AA49810D2D8F28BC2811827B"
 
-            val tn = "662862743793525561208"
-            Log.e("MMM", "onSuccess"+tn)
-            // UnionPayType.TEST 为银联测试环境；UnionPayType.RELEASE 为银联正式环境
-            FastUnionPay(this).pay(UnionPayType.TEST, tn, object : UnionPayObserver {
+            FastWxPay("wx7e16cf49c52635e2", this).pay(request, object : WxPayObserver {
                 override fun onSuccess() {
-                    Log.e("MMM", "onSuccess")
+                    Log.e("MMM", "success")
+                    //成功，微信app返回的结果。注意一定不能以客户端返回作为用户支付的结果，应以服务器端的接收的支付通知或查询API返回的结果为准
                 }
 
                 override fun onFailed(message: String) {
-                    Log.e("MMM", message)
+                    Log.e("MMM", "fail"+message)
+                    //失败，微信app返回的结果。注意一定不能以客户端返回作为用户支付的结果，应以服务器端的接收的支付通知或查询API返回的结果为准
                 }
 
                 override fun onCancel() {
-                    Log.e("MMM", "onCancel")
+                    //取消
+                    Log.e("MMM", "cancel")
                 }
 
                 override fun onComplete() {
@@ -46,11 +54,70 @@ class MainActivity : AppCompatActivity() {
             })
 
 
+
+//            val tn = "662862743793525561208"
+//            Log.e("MMM", "onSuccess"+tn)
+//            // UnionPayType.TEST 为银联测试环境；UnionPayType.RELEASE 为银联正式环境
+//            FastUnionPay(this).pay(UnionPayType.TEST, tn, object : UnionPayObserver {
+//                override fun onSuccess() {
+//                    Log.e("MMM", "onSuccess")
+//                }
+//
+//                override fun onFailed(message: String) {
+//                    Log.e("MMM", message)
+//                }
+//
+//                override fun onCancel() {
+//                    Log.e("MMM", "onCancel")
+//                }
+//
+//                override fun onComplete() {
+//                    Log.e("MMM", "complete")
+//                    // onSuccess，onFailed 都会走到这里
+//                    // 不论成功与否，都在此对服务器进行查询，一切数据，以服务器为准
+//                }
+//            })
+
+
         }
 
         btn_test.setOnClickListener {
             Toast.makeText(this,"hello",Toast.LENGTH_LONG).show()
             Log.e("MMM", "click")
+
+            val request = PayReq()
+            request.appId = "wx7e16cf49c52635e2"
+            request.partnerId = "1900000109"
+            request.prepayId = "1101000000140415649af9fc314aa427"
+            request.packageValue = "Sign=WXPay"
+            request.nonceStr = "1101000000140429eb40476f8896f4c9"
+            request.timeStamp = "1398746574"
+            request.sign = "7FFECB600D7157C5AA49810D2D8F28BC2811827B"
+
+            FastWxPay("wx7e16cf49c52635e2", this).pay(request, object : WxPayObserver {
+                override fun onSuccess() {
+                    Log.e("MMM", "success")
+                    //成功，微信app返回的结果。注意一定不能以客户端返回作为用户支付的结果，应以服务器端的接收的支付通知或查询API返回的结果为准
+                }
+
+                override fun onFailed(message: String) {
+                    Log.e("MMM", "fail"+message)
+                    //失败，微信app返回的结果。注意一定不能以客户端返回作为用户支付的结果，应以服务器端的接收的支付通知或查询API返回的结果为准
+                }
+
+                override fun onCancel() {
+                    //取消
+                    Log.e("MMM", "cancel")
+                }
+
+                override fun onComplete() {
+                    Log.e("MMM", "complete")
+                    // onSuccess，onFailed 都会走到这里
+                    // 不论成功与否，都在此对服务器进行查询，一切数据，以服务器为准
+                }
+            })
+
+
         }
 
 

@@ -12,7 +12,8 @@ data class PayResource(val status: PayStatus, val message: String?) {
             return PayResource(PayStatus.SUCCESS, null)
         }
 
-        fun failed(msg: String): PayResource {
+        //resp.errStr,resp.transaction,resp.openId
+        fun failed(msg: String,resp: String, transaction: String, openId: String): PayResource {
             return PayResource(PayStatus.FAILED, msg)
         }
 
